@@ -25,23 +25,23 @@ Ext.define("app.view.main.businessInfo.BusinessInfoView", {
 			columns: [{
 				text: "id",
 				dataIndex: "id",
-				width: 100
+				width: 70
 			}, {
 				text: "countryid",
 				dataIndex: "countryid",
-				width: 100
+				width: 70
 			}, {
 				text: "name",
 				dataIndex: "name",
-				width: 100
+				width: 140
 			}, {
 				text: "natureid",
 				dataIndex: "natureid",
-				width: 100
+				width: 90
 			}, {
 				text: "groupid",
 				dataIndex: "groupid",
-				width: 100
+				width: 90
 			}, {
 				text: "agent_cheap",
 				dataIndex: "agentCheap",
@@ -69,23 +69,23 @@ Ext.define("app.view.main.businessInfo.BusinessInfoView", {
 			}, {
 				text: "greenboxid",
 				dataIndex: "greenboxid",
-				width: 100
+				width: 80
 			}, {
 				text: "iscpa",
 				dataIndex: "iscpa",
-				width: 100
+				width: 70
 			}, {
 				text: "materials",
 				dataIndex: "materials",
-				width: 100
+				width: 340
 			}, {
 				text: "services",
 				dataIndex: "services",
-				width: 100
+				width: 340
 			}, {
 				text: "dscription",
 				dataIndex: "dscription",
-				width: 100
+				width: 200
 			}, {
 				text: "prescription",
 				dataIndex: "prescription",
@@ -97,7 +97,7 @@ Ext.define("app.view.main.businessInfo.BusinessInfoView", {
 			}, {
 				text: "sortnum",
 				dataIndex: "sortnum",
-				width: 100
+				width: 80
 			}, {
 				text: "querycount",
 				dataIndex: "querycount",
@@ -109,7 +109,7 @@ Ext.define("app.view.main.businessInfo.BusinessInfoView", {
 			}, {
 				text: "updatetime",
 				dataIndex: "updatetime",
-				width: 100
+				width: 140
 			}, {
 				xtype: "actioncolumn",
 				text: "操作",
@@ -130,34 +130,49 @@ Ext.define("app.view.main.businessInfo.BusinessInfoView", {
 			tbar: [{
 				xtype: "textfield",
 				maxWidth: 205,
-				fieldLabel: "角色编号",
-				labelWidth: 60
+				fieldLabel: "id",
+                width: 200,
+				labelWidth: 45
 			}, {
 				xtype: "textfield",
 				maxWidth: 205,
-				fieldLabel: "角色名称",
-				labelWidth: 60
+				fieldLabel: "name",
+                width: 200,
+				labelWidth: 45
 			}, {
 				xtype: "button",
 				text: "搜索",
-				glyph: 0xf002,
-				handler: "search"
+                icon: "../icons/bullet_magnify.png",
+                cls: "x-btn-text-icon",
+				handler: "onSearch"
 			}, "->", "->", {
 				xtype: "button",
 				text: "新增",
-				glyph: 0xf067,
+                icon: "extjs/resources/images/tree/drop-add.png",
+                cls: "x-btn-text-icon",
 				handler: "onCreate"
 			}, {
 				xtype: "button",
 				text: "批量删除",
-				glyph: 0xf00d,
+                icon: "../icons/bullet_cross.png",
+                cls: "x-btn-text-icon",
 				handler: "onBatchDel"
 			}, {
 				xtype: "button",
 				text: "刷新",
-				glyph: 0xf00d,
+                icon: "../icons/arrow_rotate_clockwise.png",
+                cls: "x-btn-text-icon",
 				handler: "onRefresh"
-			}]
+			}],
+
+            dockedItems: [{
+                xtype: 'pagingtoolbar',
+                bind: {
+                    store: "{business}"
+                },
+                dock: 'bottom',
+                displayInfo: true
+            }]
 		});
 		this.callParent(arguments);
 	}

@@ -3,6 +3,8 @@ Ext.define("app.view.main.businessInfo.BusinessInfoStore", {
 	alias: "store.businessInfo",
 	
 	model: "app.view.main.businessInfo.BusinessInfoModel",
+
+    pageSize: 25, // 分页大小
 	
 	proxy: {
 		type: "ajax",
@@ -10,7 +12,8 @@ Ext.define("app.view.main.businessInfo.BusinessInfoStore", {
 		url: "/user/top", //TODO 后台访问地址
 		reader: {
 			type: "json",
-			rootProperty: "data"
+			rootProperty: "data",
+            totalProperty: 'totalProperty'
 		}
 	}
 });

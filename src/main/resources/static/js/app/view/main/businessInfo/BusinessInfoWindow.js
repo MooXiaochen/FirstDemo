@@ -31,99 +31,119 @@ Ext.define("app.view.main.businessInfo.BusinessInfoWindow", {
 				fieldDefaults: {
 					flex: 2,
 					margin: 10,
-					labelWidth: 60
+					labelWidth: 90
 				},
 				items: [{
 					xtype: "panel",
                     baseCls: "x-plain",
 					layout: "column",
-
+                    columnWidth: .49,
 					items: [{
 						xtype: "hiddenfield",
 						name: "id"
 					}, {
 						xtype: "numberfield",
 						name: "countryid",
-						fieldLabel: "countryid"
+						fieldLabel: "countryid",
+                        columnWidth: .49
 					}, {
                         xtype: "textfield",
-						fieldLabel: "name"
+                        name: "name",
+						fieldLabel: "name",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "natureid",
-						fieldLabel: "natureid"
+						fieldLabel: "natureid",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "groupid",
-						fieldLabel: "groupid"
+						fieldLabel: "groupid",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "agentCheap",
 						allowDecimals: true, // 允许小数点
 						allowNegative: true, // 允许负数
-						fieldLabel: "agent_cheap"
+						fieldLabel: "agent_cheap",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "agentQuote",
 						allowDecimals: true, // 允许小数点
 						allowNegative: true, // 允许负数
-						fieldLabel: "agent_quote"
+						fieldLabel: "agent_quote",
+                        columnWidth: .49
 					}, {
                         xtype: "textfield",
 						name: "agentExplain",
-						fieldLabel: "agent_explain"
+						fieldLabel: "agent_explain",
+                        columnWidth: .49
 					}, {
 						xtype: "numberfield",
 						allowDecimals: true, // 允许小数点
 						allowNegative: true, // 允许负数
 						name: "clientCheap",
-						fieldLabel: "client_cheap"
+						fieldLabel: "client_cheap",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						allowDecimals: true, // 允许小数点
 						allowNegative: true, // 允许负数
 						name: "clientQuote",
-						fieldLabel: "client_quote"
+						fieldLabel: "client_quote",
+                        columnWidth: .49
 					}, {
                         xtype: "textfield",
 						name: "clientExplain",
-						fieldLabel: "client_explain"
+						fieldLabel: "client_explain",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "greenboxid",
-						fieldLabel: "greenboxid"
+						fieldLabel: "greenboxid",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "iscpa",
-						fieldLabel: "iscpa"
+						fieldLabel: "iscpa",
+                        columnWidth: .49
 					}, {
 						xtype: "textarea",
 						name: "materials",
-						fieldLabel: "materials"
+						fieldLabel: "materials",
+                        columnWidth: .98
 					}, {
 						xtype: "textarea",
 						name: "services",
-						fieldLabel: "services"
+						fieldLabel: "services",
+                        columnWidth: .98
 					}, {
                         xtype: "textfield",
 						name: "dscription",
-						fieldLabel: "dscription"
+						fieldLabel: "dscription",
+                        columnWidth: .98
 					}, {
                         xtype: "textfield",
 						name: "prescription",
-						fieldLabel: "prescription"
+						fieldLabel: "prescription",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "isLock",
-						fieldLabel: "is_lock"
+						fieldLabel: "is_lock",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "sortnum",
-						fieldLabel: "sortnum"
+						fieldLabel: "sortnum",
+                        columnWidth: .49
 					}, {
                         xtype: "numberfield",
 						name: "content",
-						fieldLabel: "content"
+						fieldLabel: "content",
+                        columnWidth: .49
 					}]
 				}]
 			}],

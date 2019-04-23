@@ -16,7 +16,7 @@ Ext.define("app.view.main.businessInfo.BusinessInfoContoller",{
 		var win = Ext.create("app.view.main.businessInfo.BusinessInfoWindow", {
             title: "新建信息",
             width: 600,
-	        height: 850,
+	        height: 650,
 		});
 		win.show();
     },
@@ -50,7 +50,7 @@ Ext.define("app.view.main.businessInfo.BusinessInfoContoller",{
 		var win = Ext.create("app.view.main.businessInfo.BusinessInfoWindow", {
             title: "编辑用户 - #" + rec.get("id"),
             width: 600,
-	        height: 850,
+	        height: 650,
 		});
         win.down("form").loadRecord(rec);
         win.initParam = rec;
@@ -78,8 +78,15 @@ Ext.define("app.view.main.businessInfo.BusinessInfoContoller",{
 
     // window  取消
     onCancel: function (button, e) {
-        var me = this;
-        var gir = button.up('businessWin')
-        debugger
+        var gir = button.up('businessWin');
+        gir.close();
     },
+
+    // window  搜索
+    onSearch: function (button, e) {
+        var gir = button.up('businessWin');
+        debugger
+
+        gir.close();
+    }
 });
