@@ -10,7 +10,8 @@ Ext.define('app.view.main.Main', {
     requires: [
         'app.view.main.MainController',
         'app.view.main.MainModel',
-        'app.view.main.businessInfo.BusinessInfoView'
+        'app.view.main.businessInfo.BusinessInfoView',
+        'app.view.main.trademarkInformation.TrademarkInformationView'
     ],
 
     xtype: 'app-main',
@@ -43,11 +44,11 @@ Ext.define('app.view.main.Main', {
         region: 'center',
         xtype: 'tabpanel',
         items:[{
-            title: 'Tab 1',
-            html: '<h2>Content appropriate for the current navigation.</h2>'
-        }, {
-            title: 'Tab 2',
+            title: '页签1',
             xtype: 'businessInfo'
+        }, {
+            title: '页签2',
+            xtype: 'trademark'
         }]
     }]
 });
