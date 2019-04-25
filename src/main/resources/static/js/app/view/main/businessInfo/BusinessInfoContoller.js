@@ -5,7 +5,10 @@ Ext.define("app.view.main.businessInfo.BusinessInfoContoller",{
     extend : "Ext.app.ViewController",
     alias: "controller.businessInfo",
 
-    uses: ["app.view.main.businessInfo.BusinessInfoWindow"],
+    uses: [
+            "app.view.main.businessInfo.BusinessInfoWindow",
+            "app.view.main.trademarkInformation.TrademarkInformationWindow"
+    ],
     
     init: function(view) {
         
@@ -88,5 +91,13 @@ Ext.define("app.view.main.businessInfo.BusinessInfoContoller",{
         debugger
 
         gir.close();
+    },
+    onTest: function (button) {
+        var win = Ext.create("app.view.main.trademarkInformation.TrademarkInformationWindow", {
+            title: "商标系统设置",
+            width: 1000,
+            height: 650,
+        });
+        win.show();
     }
 });

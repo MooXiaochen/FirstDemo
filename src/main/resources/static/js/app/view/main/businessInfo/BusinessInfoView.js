@@ -146,12 +146,18 @@ Ext.define("app.view.main.businessInfo.BusinessInfoView", {
                 cls: "x-btn-text-icon",
 				handler: "onSearch"
 			}, "->", "->", {
-				xtype: "button",
-				text: "新增",
+                xtype: "button",
+                text: "测试窗口",
                 icon: "extjs/resources/images/tree/drop-add.png",
                 cls: "x-btn-text-icon",
-				handler: "onCreate"
-			}, {
+                handler: "onTest"
+            }, {
+                xtype: "button",
+                text: "新增",
+                icon: "extjs/resources/images/tree/drop-add.png",
+                cls: "x-btn-text-icon",
+                handler: "onCreate"
+            }, {
 				xtype: "button",
 				text: "批量删除",
                 icon: "../icons/bullet_cross.png",

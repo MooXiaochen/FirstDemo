@@ -1,6 +1,7 @@
 Ext.define("app.view.main.trademarkInformation.TrademarkInformationView", {
     extend: "Ext.grid.Panel",
     xtype: "trademark",
+    id: "trademark",
 
     requires: [
         "app.view.main.trademarkInformation.TrademarkInformationViewModel",
@@ -14,7 +15,7 @@ Ext.define("app.view.main.trademarkInformation.TrademarkInformationView", {
     controller: "trademark",
 
     bind: {
-        store: "{trademarkStore}"
+        store: "{trademark}"
     },
 
     initComponent: function() {
@@ -45,7 +46,18 @@ Ext.define("app.view.main.trademarkInformation.TrademarkInformationView", {
             }, {
                 text: "is_lock",
                 dataIndex: "isLock",
-                width: 200
+                width: 200,
+                renderer: function (value) {
+                    if (!Ext.isEmpty(value)) {
+                        if (value == 0) {
+                            return "草稿";
+                        } else if (value == 1) {
+                            return "生效";
+                        } else if (value == 2) {
+                            return "失效";
+                        }
+                    }
+                }
             }, {
                 text: "data_time",
                 dataIndex: "dataTime",

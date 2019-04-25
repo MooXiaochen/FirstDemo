@@ -8,8 +8,8 @@ Ext.define("app.view.main.trademarkInformation.TrademarkInformationViewModel",{
     ],
 
     stores: {
-        business : {
-            type: "trademark",
+        trademark : {
+            type: "trademarkStore",
             autoLoad: true
         }
     }

@@ -19,17 +19,16 @@ Ext.define("app.view.main.trademarkInformation.TrademarkInformationContoller",{
     },
 
     // 刷新
-    onRefresh: function (button, e) {
-        var me = this;
-        var store = me.view.getStore();
+    onRefresh: function (button) {
+        var store = this.lookupReference("trademarkInformationPanel").getStore();
         store.reload();
     },
 
     // 批量生效
-    onEffective: function (button, e) {
-        var me = this;
-        var record = me.view.getSelectionModel().getSelection();
-        var store = me.view.getStore();
+    onEffective: function (button) {
+        var view = this.lookupReference("trademarkInformationPanel");
+        var record = view.getSelectionModel().getSelection();
+        var store = view.getStore();
         if (Ext.isEmpty(record)) {
             Ext.Msg.alert("信息", "请选择要生效的数据！");
             return;
@@ -43,9 +42,9 @@ Ext.define("app.view.main.trademarkInformation.TrademarkInformationContoller",{
 
     // 批量失效
     onInvalid: function (button, e) {
-        var me = this;
-        var record = me.view.getSelectionModel().getSelection();
-        var store = me.view.getStore();
+        var view = this.lookupReference("trademarkInformationPanel");
+        var record = view.getSelectionModel().getSelection();
+        var store = view.getStore();
         if (Ext.isEmpty(record)) {
             Ext.Msg.alert("信息", "请选择要生效的数据！");
             return;
@@ -66,15 +65,31 @@ Ext.define("app.view.main.trademarkInformation.TrademarkInformationContoller",{
             height: 270
         });
         win.down("form").loadRecord(rec);
-        win.initParam = rec;
+        win.down("#isLock").setDisabled(true); // 设置状态栏为不可编辑
         win.show();
     },
 
     // window 保存
     onSave: function (button, e) {
-        var me = this;
-        var store = me.view.getStore();
-        store.reload();
+        var trademarkForm = this.lookupReference("trademarkForm").getForm();
+        var trademarkStore = Ext.getCmp("trademarkInformationWindow").down('gridpanel').getStore();
+        if(trademarkForm.isValid()) {
+            var id = trademarkForm.findField("id").getValue();
+            if(id) { //编辑
+                var rec = trademarkStore.getById(id);
+                rec.set("number", trademarkForm.findField("number").getValue());
+                rec.set("name", trademarkForm.findField("name").getValue());
+                rec.set("type", trademarkForm.findField("type").getValue());
+                rec.set("user", trademarkForm.findField("user").getValue());
+                rec.set("name", trademarkForm.findField("name").getValue());
+                trademarkStore.commitChanges();	//TODO 提交修改数据
+            }else { //新增
+                var obj = trademarkForm.getFieldValues();
+                obj.id = trademarkStore.last() ? parseInt(trademarkStore.last().get("id"))+1 : 1;
+                trademarkStore.add(obj);
+            }
+            button.up("trademarkWin").close();
+        }
     },
 
     // window  取消

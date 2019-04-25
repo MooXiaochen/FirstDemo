@@ -1,7 +1,3 @@
-/*
- * 窗口视图 - 用户管理
- */
-
 Ext.define("app.view.main.trademarkInformation.TrademarkWindow", {
 	extend: "Ext.window.Window",
 	xtype: "trademarkWin",
@@ -72,8 +68,9 @@ Ext.define("app.view.main.trademarkInformation.TrademarkWindow", {
                         fieldLabel: "user",
                     }, {
                         xtype: "combobox",
+                        itemId: "isLock",
                         name: "isLock",
-                        fieldLabel: "isLock",
+                        fieldLabel: "is_lock",
                         editable: false,
                         displayField: "state",
                         valueField: "value",

@@ -1,10 +1,8 @@
 Ext.define("app.view.main.trademarkInformation.TrademarkInformationStore", {
     extend: "Ext.data.Store",
-    alias: "store.trademark",
+    alias: "store.trademarkStore",
 
     model: "app.view.main.trademarkInformation.TrademarkInformationModel",
-
-    pageSize: 25, // 分页大小
 
     proxy: {
         type: "ajax",
