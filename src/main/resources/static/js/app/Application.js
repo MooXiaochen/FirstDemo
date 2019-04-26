@@ -15,4 +15,7 @@ Ext.define('app.Application', {
     launch: function () {
         // TODO - Launch the application
     }
+    /**
+     * 测试vs code git提交
+     */
 });
