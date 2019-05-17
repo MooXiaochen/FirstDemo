@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.firstdemo.mapper.StatusListMapper">
+  <resultMap id="BaseResultMap" type="com.example.firstdemo.pojo.StatusList">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="table_name" jdbcType="INTEGER" property="tableName" />
+    <result column="filed_name" jdbcType="INTEGER" property="filedName" />
+    <result column="remark" jdbcType="INTEGER" property="remark" />
+    <result column="status_no" jdbcType="INTEGER" property="statusNo" />
+    <result column="status_type" jdbcType="INTEGER" property="statusType" />
+    <result column="app_dept" jdbcType="INTEGER" property="appDept" />
+    <result column="group_name" jdbcType="INTEGER" property="groupName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, text, name, table_name, filed_name, remark, status_no, status_type,
+    app_dept, group_name
+  </sql>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT * FROM StatusList
+  </select>
+
+</mapper>

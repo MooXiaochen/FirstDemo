@@ -3,10 +3,12 @@ package com.example.firstdemo.pojo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Business {
+public class Business implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 

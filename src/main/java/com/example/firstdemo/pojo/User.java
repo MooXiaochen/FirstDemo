@@ -1,6 +1,8 @@
 package com.example.firstdemo.pojo;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Long id;//唯一标识
     private  String name;
     private  Integer age;

@@ -11,7 +11,9 @@ Ext.define('app.view.main.Main', {
         'app.view.main.MainController',
         'app.view.main.MainModel',
         'app.view.main.businessInfo.BusinessInfoView',
-        'app.view.main.trademarkInformation.TrademarkInformationView'
+        'app.view.main.trademarkInformation.TrademarkInformationView',
+        'app.view.main.repository.Repository',
+        'app.view.main.statusList.StatusListView'
     ],
 
     xtype: 'app-main',
@@ -49,6 +51,12 @@ Ext.define('app.view.main.Main', {
         }, {
             title: '页签2',
             xtype: 'trademark'
+        }, {
+            title: '页签3',
+            xtype: 'statusList'
+        }, {
+            title: '页签4',
+            xtype: 'repository'
         }]
     }]
 });

@@ -4,7 +4,10 @@ server:
 spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    ## url + 用户名 + 密码
+    #url: jdbc:sqlserver://120.78.83.59:5555;DatabaseName=skycharm-oa
+    url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=dbo
+    username: sa
+    password: 123456
     maxActive: 20
     initialSize: 1
     maxWait: 60000

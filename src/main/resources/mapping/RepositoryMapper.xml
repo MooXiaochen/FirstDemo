@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.firstdemo.mapper.RepositoryMapper">
+  <resultMap id="BaseResultMap" type="com.example.firstdemo.pojo.Repository">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="section" jdbcType="VARCHAR" property="section" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="theme" jdbcType="VARCHAR" property="theme" />
+    <result column="publish_state" jdbcType="INTEGER" property="publishState" />
+  </resultMap>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT * FROM Repository
+  </select>
+
+  <insert id="create" parameterType="Repository" useGeneratedKeys="true" keyProperty="id">
+        insert into Repository(user_id,keyword,section,publish_time,theme,publish_state)
+        values(#{userId},#{keyword},#{section},#{publishTime},#{theme},#{publishState})
+    </insert>
+
+</mapper>
