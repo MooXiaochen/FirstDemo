@@ -31,10 +31,8 @@ Ext.define("App.view.repository.Repository",{
         dataIndex: "publishState",
         flex : 1,
         renderer: function(value){
-            if (value == 1)
-                return "已发布"
-            if (value == 0)
-                return "编辑中"
+            if (value == 1) return "已发布";
+            if (value == 0) return "编辑中";
         }
     }, {
         text: "发布时间",
@@ -43,7 +41,13 @@ Ext.define("App.view.repository.Repository",{
     }, {
         text: "所属部门",
         dataIndex: "section",
-        flex : 1
+        flex : 1,
+        renderer: function(value){
+            if (value == 1) return "商务部";
+            if (value == 2) return "会计部";
+            if (value == 3) return "开发部";
+            return "未分配";
+        }
     }, {
         text: "关键字",
         dataIndex: "keyword",

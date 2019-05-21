@@ -35,9 +35,14 @@ Ext.define('App.view.repository.RepositoryController', {
             waitMsg : '正在保存提交信息,请稍后...',
             url : '/repository/save',
             method : 'post',
-            success : function(form, action) {
-                alert(action.result.msg);
+            success : function() {
+                Ext.Msg.alert("保存成功！");
+                win.close();
             },
+            failure : function(form , action){
+                var responseJson = Ext.decode(action.response.responseText);
+                Ext.Msg.alert("状态码：" + responseJson.status, "错误信息 ：" + responseJson.message);
+            }
         });
     },
 
