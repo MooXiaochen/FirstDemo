@@ -46,7 +46,7 @@ public class RepositoryController {
         repositoryService.doCreate(repository);
         RepositoryDetails repositoryDetails = new RepositoryDetails();
         repositoryDetails.setRepositoryId(repository.getId());
-        repositoryDetails.setContent(params.get("commentContent").toString());
+        repositoryDetails.setContent(params.get("content").toString());
         repositoryDetails.setUpdateTime(new Date());
         repositoryDetails.setOptCount(0);
         repositoryDetailsService.doCreate(repositoryDetails);

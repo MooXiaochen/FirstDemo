@@ -19,6 +19,8 @@ public class Repository implements Serializable {
     private String theme;
     private int publishState;
 
+    private RepositoryDetails repositoryDetails;
+
     public int getId() {
         return id;
     }
@@ -73,5 +75,13 @@ public class Repository implements Serializable {
 
     public void setPublishState(int publishState) {
         this.publishState = publishState;
+    }
+
+    public RepositoryDetails getRepositoryDetails() {
+        return repositoryDetails;
+    }
+
+    public void setRepositoryDetails(RepositoryDetails repositoryDetails) {
+        this.repositoryDetails = repositoryDetails;
     }
 }
