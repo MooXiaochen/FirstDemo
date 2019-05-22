@@ -27,8 +27,29 @@ Ext.define('App.view.repository.RepositoryController', {
         win.show();
     },
 
+    onRefresh: function (button){
+        var me = this;
+        var store = me.view.getStore();
+        store.reload();
+    },
+
+    onCheckFile: function (grid, index){
+        var me = this;
+        var rec = grid.getStore().getAt(index);
+        Ext.require(['App.view.repository.RepositoryDetails'], function () {
+            me.con = Ext.getCmp("mainContent");
+            me.con.removeAll();
+            me.con.add({xtype: 'repositoryDetails'});
+            debugger
+        })
+    },
+
+    onDel: function (grid, index){
+
+    },
+
     onWindowSubmit: function (button) {
-        var win = button.up().up();
+        var win = button.up('repositoryWin');
         var form = win.down('form');
         form.submit({
             waitTitle : '请稍后...',
@@ -48,6 +69,6 @@ Ext.define('App.view.repository.RepositoryController', {
 
     onWindowCancel: function (button) {
         button.up('repositoryWin').close();
-    }
+    },
 
 });

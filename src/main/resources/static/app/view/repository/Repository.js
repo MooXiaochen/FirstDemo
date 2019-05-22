@@ -5,6 +5,7 @@ Ext.define("App.view.repository.Repository",{
  
     requires: [
         "App.view.repository.RepositoryController",
+        "App.model.Repository",
         "App.view.repository.RepositoryModel"
     ],
     
@@ -31,8 +32,8 @@ Ext.define("App.view.repository.Repository",{
         dataIndex: "publishState",
         flex : 1,
         renderer: function(value){
-            if (value == 1) return "已发布";
-            if (value == 0) return "编辑中";
+            if (value == 1) return "<span style='color:green;'>已发布</span>";
+            if (value == 0) return "<span style='color:red;'>编辑中</span>";
         }
     }, {
         text: "发布时间",
@@ -63,18 +64,15 @@ Ext.define("App.view.repository.Repository",{
         align: "center",
         sortable: false,
         menuDisabled: true,
-        items: [{
+        items: [
+            {
             iconCls: "opt-edit",
             tooltip: "编辑",
             handler: "onEdit"
         }, {
-            iconCls: "opt-edit",
-            tooltip: "发布",
-            handler: "onPublish"
-        }, {
-            iconCls: "opt-delete",
-            tooltip: "删除",
-            handler: "onDel"
+            iconCls: "opt-search",
+            tooltip: "查看",
+            handler: "onCheckFile"
         }]
     }],
     tbar: [{
@@ -97,16 +95,16 @@ Ext.define("App.view.repository.Repository",{
         handler: "onCreate"
     }, {
         xtype: "button",
-        text: "编辑",
-        icon: "icons/application_edit.png",
-        cls: "x-btn-text-icon",
-        handler: "onEdit"
-    }, {
-        xtype: "button",
         text: "发布",
-        icon: "icons/bullet_cross.png",
+        icon: "icons/application_get.png",
         cls: "x-btn-text-icon",
         handler: "onBatchDel"
+    }, {
+        xtype: "button",
+        text: "删除",
+        icon: "icons/bullet_cross.png",
+        cls: "x-btn-text-icon",
+        handler: "onEdit"
     }, {
         xtype: "button",
         text: "刷新",
@@ -117,19 +115,7 @@ Ext.define("App.view.repository.Repository",{
 
     initComponent: function() {
         var gridStore = Ext.create('Ext.data.Store', {
-            fields: [{ name: "id", type: 'int' },
-                     { name: "userId", type: 'int' },
-                     { name: "keyword", type: "string" },
-                     { name: "section", type: 'string' },
-                     { name: "publish_time", type: 'date' },
-                     { name: "theme", type: 'string' },
-                     { name: "content", type: 'string',
-                         convert: function(value, red){
-                             value =  red.data.repositoryDetails.content
-                             return value;
-                         } },
-                     { name: "publishState", type: 'int' }
-                    ],
+            model: "App.model.Repository",
             autoLoad: true,
             proxy: {
                 type: "ajax",

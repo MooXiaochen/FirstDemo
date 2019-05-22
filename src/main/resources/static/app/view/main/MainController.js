@@ -16,7 +16,7 @@ Ext.define("App.view.main.MainController", {
 				me.loadModule(mod);
 			});
 		}else {
-			//Ext.Msg.alert("错误", "加载模块失败！");
+			Ext.Msg.alert("失败", "页面开发中。。。");
 		}
 	},
 	

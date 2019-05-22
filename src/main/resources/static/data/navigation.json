@@ -26,6 +26,7 @@
 	}, {
 		"text": "文章管理",
 		"expanded": true,
+		"cls": "node-link",
 		"children": [{
 			"text": "文章列表",
 			"leaf": true,
