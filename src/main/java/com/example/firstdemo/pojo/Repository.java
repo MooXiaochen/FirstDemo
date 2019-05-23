@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Repository implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -20,6 +21,8 @@ public class Repository implements Serializable {
     private int publishState;
 
     private RepositoryDetails repositoryDetails;
+
+    private List<RepositoryComment> repositoryCommentList;
 
     public int getId() {
         return id;
@@ -83,5 +86,13 @@ public class Repository implements Serializable {
 
     public void setRepositoryDetails(RepositoryDetails repositoryDetails) {
         this.repositoryDetails = repositoryDetails;
+    }
+
+    public List<RepositoryComment> getRepositoryCommentList() {
+        return repositoryCommentList;
+    }
+
+    public void setRepositoryCommentList(List<RepositoryComment> repositoryCommentList) {
+        this.repositoryCommentList = repositoryCommentList;
     }
 }

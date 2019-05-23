@@ -1,4 +1,4 @@
-Ext.define("App.view.repository.RepositoryWindow", {
+Ext.define("App.view.repository.details.RepositoryWindow", {
     extend: "Ext.window.Window",
     xtype: 'repositoryWin',
 

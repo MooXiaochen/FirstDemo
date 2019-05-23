@@ -18,10 +18,32 @@
       <result column="update_id" jdbcType="INTEGER" property="updateId" />
       <result column="opt_count" jdbcType="INTEGER" property="optCount" />
     </association>
+    <collection property="repositoryCommentList" ofType="com.example.firstdemo.pojo.RepositoryComment" column="id">
+      <id column="repository_comment_id" jdbcType="INTEGER" property="id" />
+      <result column="repository_id" jdbcType="INTEGER" property="repositoryId" />
+      <result column="comment_user_id" jdbcType="INTEGER" property="commentUserId" />
+      <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+      <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+    </collection>
   </resultMap>
 
   <select id="findAll" resultMap="BaseResultMap">
     SELECT * FROM repository r, repository_details rd WHERE r.repository_id = rd.repository_id
+  </select>
+
+  <select id="findById" parameterType="int" resultMap="BaseResultMap">
+    SELECT
+      *
+    FROM
+      repository r,
+      repository_details rd,
+      repository_comment rc
+    WHERE
+        r.repository_id = #{id}
+      AND
+        r.repository_id = rd.repository_id
+      AND
+        r.repository_id = rc.repository_id
   </select>
 
   <insert id="create" parameterType="Repository" useGeneratedKeys="true" keyProperty="id">

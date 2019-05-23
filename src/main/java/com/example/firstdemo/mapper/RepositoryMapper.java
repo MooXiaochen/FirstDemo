@@ -21,4 +21,12 @@ public interface RepositoryMapper {
      * @return
      */
     void create(Repository repository);
+
+    /**
+     * 根据id获取数据
+     *
+     * @param id
+     * @return
+     */
+    Repository findById (int id);
 }

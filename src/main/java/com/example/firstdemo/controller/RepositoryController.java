@@ -51,4 +51,9 @@ public class RepositoryController {
         repositoryDetails.setOptCount(0);
         repositoryDetailsService.doCreate(repositoryDetails);
     }
+
+    @RequestMapping("/getById")
+    public Repository getById(@RequestParam("id") int id){
+        return repositoryService.doRepositoryById(id);
+    }
 }

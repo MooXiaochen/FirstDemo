@@ -3,11 +3,41 @@ Ext.define('App.view.repository.RepositoryController', {
     alias: 'controller.repository',
 
     requires: [
-        "App.view.repository.RepositoryWindow"
+        "App.view.repository.details.RepositoryWindow"
     ],
 
+    init: function(application){
+        this.control({
+            "repositoryDetails" : {
+                afterrender  : 'onShow'
+            }
+        })
+    },
+
+    onShow: function(a, b) {
+        var view = this.view;
+        var repositoryId = view.infoData.id;
+        if (Ext.isEmpty(repositoryId)) {
+            return;
+        }
+        var panelTpl = new Ext.XTemplate('<h2  style="text-align:center">{theme}</h2>' +
+                    '<p style="text-align:center">{publishTime:date("Y-m-d H:i:s")}</p>' +
+                    '<table style="border:0;width:100%">' +
+                    '<tr>' +
+                    '<td style="border:0;width:50%;"><b>部门</b>：{section}</td>' +
+                    '<td style="border:0;width:50%;"><b>关键字</b>：{keyword}</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td style="border:0;width:50%;"><b>发布人</b>：{userId}</td>' +
+                    '</tr>' +
+                    '</table>' +
+                    '<h3 style="border-bottom:1px solid;line-height:30px;">{repositoryDetails.content}</h3>'
+                );
+        panelTpl.overwrite(Ext.get("div_boby"), view.infoData.data);
+    },
+
     onCreate: function () {
-        var win = Ext.create("App.view.repository.RepositoryWindow", {
+        var win = Ext.create("App.view.repository.details.RepositoryWindow", {
             title: "新建",
             width: '80%',
             height: '87%'
@@ -17,7 +47,7 @@ Ext.define('App.view.repository.RepositoryController', {
 
     onEdit: function (grid, index) {
         var rec = grid.getStore().getAt(index);
-        var win = Ext.create("App.view.repository.RepositoryWindow", {
+        var win = Ext.create("App.view.repository.details.RepositoryWindow", {
             title: "编辑",
             width: '80%',
             height: '87%'
@@ -36,12 +66,21 @@ Ext.define('App.view.repository.RepositoryController', {
     onCheckFile: function (grid, index){
         var me = this;
         var rec = grid.getStore().getAt(index);
-        Ext.require(['App.view.repository.RepositoryDetails'], function () {
-            me.con = Ext.getCmp("mainContent");
-            me.con.removeAll();
-            me.con.add({xtype: 'repositoryDetails'});
-            debugger
+        Ext.Ajax.request({
+            url: "/repository/getById",
+            params : {
+                id : rec.get("id")
+            },
+            success : function(response) {
+                var obj = Ext.decode(response.responseText);
+                Ext.require(['App.view.repository.details.RepositoryDetails'], function () {
+                    me.con = Ext.getCmp("mainContent");
+                    me.con.removeAll();
+                    me.con.add({ xtype: 'repositoryDetails', infoData: {id:rec.get("id"), data: obj}});
+                })
+            }
         })
+
     },
 
     onDel: function (grid, index){

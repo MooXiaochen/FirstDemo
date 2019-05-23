@@ -18,4 +18,12 @@ public interface RepositoryService {
      * @param repository
      */
     void doCreate(Repository repository);
+
+    /***
+     * 根据id获取数据
+     *
+     * @param id
+     * @return
+     */
+    Repository doRepositoryById (int id);
 }

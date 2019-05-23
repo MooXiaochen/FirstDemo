@@ -23,4 +23,9 @@ public class RepositoryServiceImpl implements RepositoryService {
     public void doCreate(Repository repository) {
         repositoryMapper.create(repository);
     }
+
+    @Override
+    public Repository doRepositoryById(int id) {
+        return repositoryMapper.findById(id);
+    }
 }
