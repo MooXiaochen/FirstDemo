@@ -20,18 +20,51 @@ Ext.define('App.view.repository.RepositoryController', {
         if (Ext.isEmpty(repositoryId)) {
             return;
         }
-        var panelTpl = new Ext.XTemplate('<h2  style="text-align:center">{theme}</h2>' +
+        var panelTpl = new Ext.XTemplate('<h2 style="text-align:center">{theme}</h2>' +
                     '<p style="text-align:center">{publishTime:date("Y-m-d H:i:s")}</p>' +
+                    '<!--  -->'+
                     '<table style="border:0;width:100%">' +
                     '<tr>' +
-                    '<td style="border:0;width:50%;"><b>部门</b>：{section}</td>' +
-                    '<td style="border:0;width:50%;"><b>关键字</b>：{keyword}</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td style="border:0;width:50%;"><b>发布人</b>：{userId}</td>' +
+                    '<td style="border:0;width:33%; text-align:center"><b>部门</b>：' +
+                        '<tpl if="section == 1">商务部</tpl>' +
+                        '<tpl if="section == 2">会计部</tpl>' +
+                        '<tpl if="section == 3">开发部</tpl>' +
+                    '</td>' +
+                    '<td style="border:0;width:33%; text-align:center"><b>关键字</b>：{keyword}</td>' +
+                    '<td style="border:0;width:33%; text-align:center"><b>发布人</b>：' +
+                        '<tpl if="userId == 1">系统管理员</tpl>' +
+                        '<tpl if="userId != 1">默认人员</tpl>' +
+                    '</td>' +
                     '</tr>' +
                     '</table>' +
-                    '<h3 style="border-bottom:1px solid;line-height:30px;">{repositoryDetails.content}</h3>'
+                    '<hr style="height: 2px;border:none;border-top:2px solid #555;margin: 20px auto;width: 96%">'+
+                    '<div style="margin: 0 auto;width: 70%">{repositoryDetails.content}</div>' +
+                    '<tpl for="repositoryCommentList">' +
+                    '<hr style="height: 1px;border:none;border-top:1px solid #555;margin: 20px auto;width: 96%">'+
+                    '<div style="margin: 5px auto; width: 96%">' +
+                        '<div style="width:17%;float:left">' +
+                            '<table style="border:0;width:100%">' +
+                            '<tr>' +
+                                '<td style="border:0;width:100%;"><img src="img/portrait.png" style="float:left;width:80px;height:80px"></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td style="border:0;width:100%;"><b>发布人</b>：{commentUserId}</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td style="border:0;width:100%;"><b>发布时间</b>：{commentTime:date("Y-m-d H:i:s")}</td>' +
+                            '</tr>' +
+                            '</table>' +
+                        '</div>' +
+                        '<div style="width: 75%;float: right;margin: 10px 100px 0px 0px">' +
+                            '<span>{commentContent}</span>' +
+                        '</div>' +
+                    '</div>'+
+                    '</tpl>'+
+                    '<hr style="height: 1px;border:none;border-top:1px solid #555;margin: 20px auto;width: 96%">'+
+                    '<span style="font-weight:bold;font-size:14px;margin-left:2%">发表回复：</span><br/>'+
+                    '<textarea name="a" style="width:96%;height:160px;margin-left: 2%;margin-top: 10px;resize:none;" maxlength="20" placeholder="请输入不要超过15个字">这里写内容</textarea>'+
+                    // '<div contenteditable="true" style="width:96%;min-height: 60px; max-height: 200px;border: 1px solid black;margin: 10px auto"></div>'+
+                    '<button style="width: 65px;height: 30px;margin: 10px 0px 100px 48%">&nbsp发&nbsp表&nbsp</button>'
                 );
         panelTpl.overwrite(Ext.get("div_boby"), view.infoData.data);
     },
@@ -72,6 +105,10 @@ Ext.define('App.view.repository.RepositoryController', {
                 id : rec.get("id")
             },
             success : function(response) {
+                if (Ext.isEmpty(response.responseText)){
+                    Ext.Msg.alert("失败", "后台数据有误！未查询到数据。");
+                    return
+                }
                 var obj = Ext.decode(response.responseText);
                 Ext.require(['App.view.repository.details.RepositoryDetails'], function () {
                     me.con = Ext.getCmp("mainContent");
