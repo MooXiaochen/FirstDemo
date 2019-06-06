@@ -5,21 +5,31 @@ Ext.define("App.view.login.LoginController", {
 	
 	onSpecialKey: function(field, e) {
 		if(e.getKey() == e.ENTER) {
-			this.doLogin();
+			this.onLogin();
 		}
 	},
 	
 	onLogin: function() {
-		this.doLogin();
-	},
-	
-	doLogin: function() {
-		var form = this.lookupReference("loginForm");
-		if(form.isValid()) {
-			this.getView().destroy();
-			Ext.create("App.view.main.Main");
-		}
+		var me = this;
+        var form = this.lookupReference("loginForm");
+        form.submit({
+            waitTitle : '提示',
+            waitMsg : '验证中，请稍后...',
+            url : '/users/login',
+            success : function(response, options) {
+                debugger
+                var o = Ext.util.JSON.decode(response.responseText);
+                me.getView().destroy();
+                Ext.create("App.view.main.Main");
+                alert(o.msg);
+            },
+            failure : function() {
+                debugger
+            }
+		});
+
 	}
+	
 });
 
 

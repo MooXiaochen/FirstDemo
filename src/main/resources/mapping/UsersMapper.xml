@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.firstdemo.mapper.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.example.firstdemo.pojo.Users">
+    <id column="user_id" jdbcType="INTEGER" property="id" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="registration_time" jdbcType="TIMESTAMP" property="registrationTime" />
+  </resultMap>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT * from users
+  </select>
+
+  <select id="findByNameAndPassword" resultMap="BaseResultMap">
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+        user_name = #{userName}
+      AND
+        user_password = #{userPassword}
+  </select>
+
+  <insert id="create" parameterType="Users" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO
+      users(nick_name, user_name, user_password, sex, grade, registration_time)
+    VALUES
+      (#{nickName}, #{userName}, #{userPassword}, #{sex}, #{grade}, #{registrationTime})
+  </insert>
+</mapper>

@@ -13,4 +13,11 @@ public interface RepositoryCommentMapper {
      * @return
      */
     List<RepositoryComment> findAll();
+
+    /**
+     * 新增
+     *
+     * @param repositoryComment
+     */
+    void create(RepositoryComment repositoryComment);
 }

@@ -26,7 +26,10 @@ Ext.define("App.view.repository.Repository",{
     }, {
         text: "标题",
         dataIndex: "theme",
-        flex : 3
+        flex : 3,
+        renderer: function(value){
+            return "<b>" + value + "</b>";
+        }
     }, {
         text: "状态",
         dataIndex: "publishState",
@@ -56,7 +59,12 @@ Ext.define("App.view.repository.Repository",{
     }, {
         text: "发布人",
         dataIndex: "userId",
-        flex : 1
+        flex : 1,
+        renderer: function(value){
+            if (value == 0) return "默认人员";
+            if (value == 1) return "系统管理员";
+            return "未知";
+        }
     }, {
         xtype: "actioncolumn",
         text: "操作",

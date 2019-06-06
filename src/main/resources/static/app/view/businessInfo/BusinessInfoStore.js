@@ -9,7 +9,7 @@ Ext.define("App.view.businessInfo.BusinessInfoStore", {
 	proxy: {
 		type: "ajax",
 		// url: "data/businessInfoData.json", //TODO 后台访问地址
-		url: "/user/top", //TODO 后台访问地址
+		url: "/hello/top", //TODO 后台访问地址
 		reader: {
 			type: "json",
 			rootProperty: "data",

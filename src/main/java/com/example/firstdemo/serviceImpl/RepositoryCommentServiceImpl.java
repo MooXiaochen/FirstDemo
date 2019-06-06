@@ -18,4 +18,9 @@ public class RepositoryCommentServiceImpl implements RepositoryCommentService {
     public List<RepositoryComment> doFindAll() {
         return repositoryCommentMapper.findAll();
     }
+
+    @Override
+    public void doCreate(RepositoryComment repositoryComment) {
+        repositoryCommentMapper.create(repositoryComment);
+    }
 }

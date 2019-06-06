@@ -13,4 +13,9 @@
     SELECT * FROM RepositoryComment
   </select>
 
+  <insert id="create" parameterType="RepositoryComment" useGeneratedKeys="true" keyProperty="id">
+        insert into repository_comment(repository_id,comment_user_id,comment_time,comment_content)
+        values(#{repositoryId},#{commentUserId},#{commentTime},#{commentContent})
+  </insert>
+
 </mapper>

@@ -12,4 +12,12 @@ public interface RepositoryCommentService {
      * @return
      */
     List<RepositoryComment> doFindAll();
+
+    /**
+     * 新增
+     * @param repositoryComment
+     *
+     * @return
+     */
+    void doCreate(RepositoryComment repositoryComment);
 }

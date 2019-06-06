@@ -26,14 +26,14 @@ Ext.define('App.view.repository.RepositoryController', {
                     '<table style="border:0;width:100%">' +
                     '<tr>' +
                     '<td style="border:0;width:33%; text-align:center"><b>部门</b>：' +
-                        '<tpl if="section == 1">商务部</tpl>' +
-                        '<tpl if="section == 2">会计部</tpl>' +
-                        '<tpl if="section == 3">开发部</tpl>' +
+                        '<tpl if="section == 1">商务部' +
+                        '<tpl elseif="section == 2">会计部' +
+                        '<tpl else>开发部</tpl>' +
                     '</td>' +
                     '<td style="border:0;width:33%; text-align:center"><b>关键字</b>：{keyword}</td>' +
                     '<td style="border:0;width:33%; text-align:center"><b>发布人</b>：' +
-                        '<tpl if="userId == 1">系统管理员</tpl>' +
-                        '<tpl if="userId != 1">默认人员</tpl>' +
+                        '<tpl if="userId == 1">系统管理员' +
+                        '<tpl else>默认人员</tpl>' +
                     '</td>' +
                     '</tr>' +
                     '</table>' +
@@ -62,9 +62,9 @@ Ext.define('App.view.repository.RepositoryController', {
                     '</tpl>'+
                     '<hr style="height: 1px;border:none;border-top:1px solid #555;margin: 20px auto;width: 96%">'+
                     '<span style="font-weight:bold;font-size:14px;margin-left:2%">发表回复：</span><br/>'+
-                    '<textarea name="a" style="width:96%;height:160px;margin-left: 2%;margin-top: 10px;resize:none;" maxlength="20" placeholder="请输入不要超过15个字">这里写内容</textarea>'+
+                    '<textarea id="details" style="width:96%;height:80px;max-height:200px;margin-left: 2%;margin-top: 10px;resize:none;" maxlength="2000">这里写内容</textarea>'+
                     // '<div contenteditable="true" style="width:96%;min-height: 60px; max-height: 200px;border: 1px solid black;margin: 10px auto"></div>'+
-                    '<button style="width: 65px;height: 30px;margin: 10px 0px 100px 48%">&nbsp发&nbsp表&nbsp</button>'
+                    '<button id="detailsBut" style="width: 65px;height: 30px;margin: 10px 0px 100px 48%" parameterId="{id}">&nbsp发&nbsp表&nbsp</button>'
                 );
         panelTpl.overwrite(Ext.get("div_boby"), view.infoData.data);
     },
@@ -148,3 +148,6 @@ Ext.define('App.view.repository.RepositoryController', {
     },
 
 });
+function test() {
+    alert("aaa");
+}
