@@ -8,7 +8,7 @@ Ext.define("App.view.businessInfo.BusinessInfoWindow", {
 	
 	requires: [
             "App.view.businessInfo.BusinessInfoViewModel",
-            "App.view.businessInfo.BusinessInfoContoller"
+            "App.view.businessInfo.BusinessInfoController"
         ],
 	viewModel: {
 		type: "businessInfo"

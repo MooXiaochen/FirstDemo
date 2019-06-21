@@ -7,34 +7,65 @@
 		"mod": "desktop",
 		"modUrl": "desktop.Desktop"
 	}, {
-		"text": "系统管理",
-		"expanded": true,
+		"text": "政策公告",
+		"leaf": true,
 		"cls": "node-link",
-		"children": [{
-			"text": "角色管理",
-			"leaf": true,
-			"cls": "node-link",
-			"mod": "role",
-			"modUrl": "role.Role"
-		}, {
-			"text": "用户管理",
-			"leaf": true,
-			"cls": "node-link",
-			"mod": "user",
-			"modUrl": "user.User"
-		}]
+		"mod": "desktop",
+		"modUrl": "desktop.Desktop"
 	}, {
-		"text": "文章管理",
+		"text": "团队建设",
+		"leaf": true,
+		"cls": "node-link",
+		"mod": "desktop",
+		"modUrl": "desktop.Desktop"
+	}, {
+		"text": "培训活动",
+		"leaf": true,
+		"cls": "node-link",
+		"mod": "desktop",
+		"modUrl": "desktop.Desktop"
+	}, {
+		"text": "知识分享",
 		"expanded": true,
 		"cls": "node-link",
 		"children": [{
-			"text": "文章列表",
+			"text": "知识产权中心",
 			"leaf": true,
 			"cls": "node-link",
 			"mod": "repository",
 			"modUrl": "repository.Repository"
 		}, {
-			"text": "发布文章",
+			"text": "产品中心",
+			"leaf": true,
+			"cls": "node-link",
+			"mod": "repositoryDetails",
+			"modUrl": "repository.details.RepositoryDetails"
+		}, {
+			"text": "商务中心",
+			"leaf": true,
+			"cls": "node-link",
+			"mod": "repositoryDetails",
+			"modUrl": "repository.details.RepositoryDetails"
+		}, {
+			"text": "技术中心",
+			"leaf": true,
+			"cls": "node-link",
+			"mod": "repositoryDetails",
+			"modUrl": "repository.details.RepositoryDetails"
+		}, {
+			"text": "会计中心",
+			"leaf": true,
+			"cls": "node-link",
+			"mod": "repositoryDetails",
+			"modUrl": "repository.details.RepositoryDetails"
+		}, {
+			"text": "客服中心",
+			"leaf": true,
+			"cls": "node-link",
+			"mod": "repositoryDetails",
+			"modUrl": "repository.details.RepositoryDetails"
+		}, {
+			"text": "财务管理中心",
 			"leaf": true,
 			"cls": "node-link",
 			"mod": "repositoryDetails",
@@ -42,7 +73,7 @@
 		}]
 	}, {
 		"text": "新增Demo",
-		"expanded": true,
+		"expanded": false,
 		"cls": "node-link",
 		"children": [{
 			"text": "事务信息",
@@ -56,10 +87,16 @@
 			"cls": "node-link",
 			"mod": "trademark",
 			"modUrl": "trademarkInformation.TrademarkInformationView"
+		}, {
+			"text": "资产信息管理",
+			"leaf": true,
+			"cls": "node-link",
+			"mod": "propertyList",
+			"modUrl": "property.PropertyListView"
 		}]
 	}, {
 		"text": "报表管理",
-		"expanded": true,
+		"expanded": false,
 		"children": [{
 			"text": "生成报表",
 			"leaf": true
@@ -69,6 +106,23 @@
 		}, {
 			"text": "报表打印",
 			"leaf": true
+		}]
+	}, {
+		"text": "系统管理",
+		"expanded": false,
+		"cls": "node-link",
+		"children": [{
+			"text": "角色管理",
+			"leaf": true,
+			"cls": "node-link",
+			"mod": "role",
+			"modUrl": "role.Role"
+		}, {
+			"text": "用户管理",
+			"leaf": true,
+			"cls": "node-link",
+			"mod": "user",
+			"modUrl": "user.User"
 		}]
 	}]
 }

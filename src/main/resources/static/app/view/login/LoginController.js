@@ -17,11 +17,9 @@ Ext.define("App.view.login.LoginController", {
             waitMsg : '验证中，请稍后...',
             url : '/users/login',
             success : function(response, options) {
-                debugger
                 var o = Ext.util.JSON.decode(response.responseText);
                 me.getView().destroy();
                 Ext.create("App.view.main.Main");
-                alert(o.msg);
             },
             failure : function() {
                 debugger

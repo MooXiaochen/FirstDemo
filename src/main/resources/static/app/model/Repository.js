@@ -1,5 +1,5 @@
 Ext.define("App.model.Repository",{
-    extend: "Ext.data.Model",
+    extend: "Ext.data.TreeModel",
 
     fields: [{ name: "id", type: 'int' },
         { name: "userId", type: 'int' },
@@ -10,7 +10,9 @@ Ext.define("App.model.Repository",{
         { name: "publishState", type: 'int' },
         { name: "content", type: 'string',
             convert: function(value, red){
-                value =  red.data.repositoryDetails.content
+                if (!Ext.isEmpty(value)){
+                    value =  red.data.repositoryDetails.content
+                }
                 return value;
             } },
         { name: "repositoryDetails", type: 'auto'},

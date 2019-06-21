@@ -4,7 +4,7 @@ Ext.define("App.view.businessInfo.BusinessInfoView", {
 	
     requires: [
         "App.view.businessInfo.BusinessInfoViewModel",
-		"App.view.businessInfo.BusinessInfoContoller",
+		"App.view.businessInfo.BusinessInfoController",
 		"App.model.BusinessInfo"
 	],
 	

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.firstdemo.mapper.PropertyMapper">
+  <resultMap id="BaseResultMap" type="com.example.firstdemo.pojo.Property">
+    <id column="property_id" jdbcType="INTEGER" property="propertyId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="property_type_id" jdbcType="INTEGER" property="propertyTypeId" />
+    <result column="property_name" jdbcType="VARCHAR" property="propertyName" />
+    <result column="equipment_no" jdbcType="VARCHAR" property="equipmentNo" />
+    <result column="property_price" jdbcType="DECIMAL" property="propertyPrice" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="registrant" jdbcType="VARCHAR" property="registrant" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    property_id, user_id, property_type_id, property_name, equipment_no, property_price, 
+    "count", create_time, update_time, description, registrant
+  </sql>
+
+  <!-- 根据ID查询 -->
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from property
+    where property_id = #{propertyId}
+  </select>
+
+  <!-- 查询全部 -->
+  <select id="getPropertyList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from property
+  </select>
+
+  <!-- 根据ids删除 -->
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from property
+    where property_id in
+    <foreach collection="list" item="propertyId" open="(" separator="," close=")">
+      #{propertyId}
+    </foreach>
+  </delete>
+
+  <!-- 新增数据 -->
+  <insert id="insertSelective" parameterType="com.example.firstdemo.pojo.Property">
+    insert into property
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="propertyTypeId != null">
+        property_type_id,
+      </if>
+      <if test="propertyName != null">
+        property_name,
+      </if>
+      <if test="equipmentNo != null">
+        equipment_no,
+      </if>
+      <if test="propertyPrice != null">
+        property_price,
+      </if>
+      <if test="count != null">
+        "count",
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="registrant != null">
+        registrant,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="propertyTypeId != null">
+        #{propertyTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="propertyName != null">
+        #{propertyName,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNo != null">
+        #{equipmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyPrice != null">
+        #{propertyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null">
+        #{registrant,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- 更新数据 -->
+  <update id="updateByIdSelective" parameterType="com.example.firstdemo.pojo.Property">
+    update property
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="propertyTypeId != null">
+        property_type_id = #{propertyTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="propertyName != null">
+        property_name = #{propertyName,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNo != null">
+        equipment_no = #{equipmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyPrice != null">
+        property_price = #{propertyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="count != null">
+        "count" = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null">
+        registrant = #{registrant,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where property_id = #{propertyId,jdbcType=INTEGER}
+  </update>
+</mapper>

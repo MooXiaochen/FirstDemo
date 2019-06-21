@@ -43,19 +43,6 @@ Ext.define("App.view.repository.details.RepositoryWindow", {
                     {"section": 3, "sectionName":"开发部"}]
             })
         }, {
-            xtype: 'combo',
-            fieldLabel: '直接发布',
-            name: "publishState",
-            queryMode: 'local',
-            displayField: 'name',
-            valueField: 'publishState',
-            columnWidth: .2,
-            store: Ext.create('Ext.data.Store', {
-                fields: ['publishState', 'name'],
-                data: [{"publishState": 1, "name":"是"},
-                    {"publishState": 0, "name":"否"}]
-            })
-        }, {
             xtype: "htmleditor",
             name: "content",
             fieldLabel: "内容",

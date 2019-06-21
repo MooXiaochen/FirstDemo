@@ -13,6 +13,7 @@ Ext.define("App.view.repository.details.RepositoryDetails",{
         html: "<div class='repositoryPanel' id='div_boby'></div>"
     }],
     listeners:{
+        // 发布回复请求
         afterlayout: function () {
             Ext.get('detailsBut').on("click", function(a, b) {
                 var detailsValue = Ext.get('details').getValue();

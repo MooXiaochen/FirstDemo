@@ -15,7 +15,9 @@ Ext.application({
 	name: "App",
 
     requires: [
+        'Overrides.*',
         'App.ux.*',
+        'App.util.Toast',
         'App.view.main.Main'
     ],
 	

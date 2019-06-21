@@ -28,7 +28,13 @@
   </resultMap>
 
   <select id="findAll" resultMap="BaseResultMap">
-    SELECT * FROM repository r, repository_details rd WHERE r.repository_id = rd.repository_id
+    SELECT
+      *
+    FROM
+      repository r,
+      repository_details rd
+    WHERE
+      r.repository_id = rd.repository_id
   </select>
 
   <select id="findById" parameterType="int" resultMap="BaseResultMap">

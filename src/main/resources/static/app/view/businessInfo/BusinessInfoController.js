@@ -1,7 +1,7 @@
 /**
  * business控制器
  */
-Ext.define("App.view.businessInfo.BusinessInfoContoller",{
+Ext.define("App.view.businessInfo.BusinessInfoController",{
     extend : "Ext.app.ViewController",
     alias: "controller.businessInfo",
 

@@ -5,7 +5,14 @@
 Ext.define("App.Application", {
 	extend: "Ext.app.Application",
 	name: "App",
-	
+
+    requires: [
+        'overrides.*',
+        'App.ux.*',
+        'App.util.Toast',
+        'App.view.main.Main'
+    ],
+
 	stores: [
 		//add global/shared stores here
 	],
