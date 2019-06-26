@@ -121,8 +121,8 @@
 			"text": "用户管理",
 			"leaf": true,
 			"cls": "node-link",
-			"mod": "user",
-			"modUrl": "user.User"
+			"mod": "users",
+			"modUrl": "users.Users"
 		}]
 	}]
 }

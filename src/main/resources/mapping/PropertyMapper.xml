@@ -13,6 +13,17 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="registrant" jdbcType="VARCHAR" property="registrant" />
+    <association property="propertyType" javaType="com.example.firstdemo.pojo.PropertyType">
+      <id property="propertyTypeId" column="property_type_id"/>
+      <result column="property_type_name" jdbcType="VARCHAR" property="propertyTypeName" />
+    </association>
+    <association property="users" javaType="com.example.firstdemo.pojo.Users">
+      <id property="id" column="user_id"/>
+      <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+      <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+      <result column="user_name_en" jdbcType="VARCHAR" property="userNameEn" />
+    </association>
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -23,16 +34,51 @@
   <!-- 根据ID查询 -->
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from property
+      <include refid="Base_Column_List" />
+    from
+      property p,
+      property_type pt
     where property_id = #{propertyId}
+    and p.property_id = pt.property_type_id
   </select>
 
   <!-- 查询全部 -->
   <select id="getPropertyList" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from property
+      *
+    from
+      property p,
+      property_type pt,
+      users u
+    where
+      p.property_type_id = pt.property_type_id
+    and
+      p.user_id = u.user_id
+  </select>
+
+  <!-- 按条件查询 -->
+  <select id="findListByCondition" resultMap="BaseResultMap">
+    select
+        *
+    from
+      property p
+    LEFT JOIN users u ON p.user_id = u.user_id
+    LEFT JOIN property_type pt ON p.property_type_id = pt.property_type_id
+    <where>
+        <if test="userId != 0">
+            AND p.user_id = #{userId}
+        </if>
+        <if test="propertyTypeId != 0">
+            AND p.property_type_id = #{propertyTypeId}
+        </if>
+        <if test="propertyName != ''">
+            AND p.property_name LIKE '%${propertyName}%'
+        </if>
+        <if test="equipmentNo != ''">
+            AND p.equipment_no LIKE '%${equipmentNo}%'
+        </if>
+
+    </where>
   </select>
 
   <!-- 根据ids删除 -->
@@ -48,6 +94,9 @@
   <insert id="insertSelective" parameterType="com.example.firstdemo.pojo.Property">
     insert into property
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
       <if test="propertyTypeId != null">
         property_type_id,
       </if>
@@ -77,6 +126,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
       <if test="propertyTypeId != null">
         #{propertyTypeId,jdbcType=INTEGER},
       </if>

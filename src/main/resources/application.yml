@@ -25,3 +25,8 @@ spring:
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.example.firstdemo.pojo
+
+logging:
+  level:
+    com.example.firstdemo.mapper: debug
+

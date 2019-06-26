@@ -9,10 +9,12 @@
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="grade" jdbcType="INTEGER" property="grade" />
     <result column="registration_time" jdbcType="TIMESTAMP" property="registrationTime" />
+    <result column="user_name_en" jdbcType="VARCHAR" property="userNameEn" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
   </resultMap>
 
   <select id="findAll" resultMap="BaseResultMap">
-    SELECT * from users
+    SELECT user_id, nick_name, user_name, user_name_en, login_name, sex, grade from users
   </select>
 
   <select id="findByNameAndPassword" resultMap="BaseResultMap">
@@ -28,8 +30,8 @@
 
   <insert id="create" parameterType="Users" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO
-      users(nick_name, user_name, user_password, sex, grade, registration_time)
+      users(nick_name, login_name, user_password, sex, grade, registration_time, user_name, user_name_en)
     VALUES
-      (#{nickName}, #{userName}, #{userPassword}, #{sex}, #{grade}, #{registrationTime})
+      (#{nickName}, #{loginName}, #{userPassword}, #{sex}, #{grade}, #{registrationTime}, #{userName}, #{userNameEn})
   </insert>
 </mapper>

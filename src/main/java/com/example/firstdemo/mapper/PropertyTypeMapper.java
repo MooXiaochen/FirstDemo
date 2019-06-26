@@ -1,17 +1,17 @@
 package com.example.firstdemo.mapper;
 
 import com.example.firstdemo.pojo.PropertyType;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PropertyTypeMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(PropertyType record);
+    List<PropertyType> findList();
 
-    int insertSelective(PropertyType record);
+    int create(@Param("propertyTypeName") String propertyTypeName);
 
-    PropertyType selectByPrimaryKey(Integer id);
+    int updateById(@Param("propertyTypeId") Long propertyTypeId, @Param("propertyTypeName") String propertyTypeName);
 
-    int updateByPrimaryKeySelective(PropertyType record);
-
-    int updateByPrimaryKey(PropertyType record);
+    int deleteByIds(List<Long> propertyTypeIds);
 }

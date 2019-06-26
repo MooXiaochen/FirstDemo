@@ -3,6 +3,7 @@ package com.example.firstdemo.service;
 import com.example.firstdemo.pojo.Property;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PropertyService {
     /**
@@ -10,7 +11,18 @@ public interface PropertyService {
      *
      * @return
      */
-    List<Property> doGetPropertyList();
+    List<Property> getPropertyList();
+
+    /**
+     * 按条件查询资产列表信息
+     *
+     * @param userId
+     * @param propertyTypeId
+     * @param propertyName
+     * @param equipmentNo
+     * @return
+     */
+    List<Property> findListByCondition(Integer userId, Integer propertyTypeId, String propertyName, String equipmentNo);
 
     /**
      * 创建资产信息

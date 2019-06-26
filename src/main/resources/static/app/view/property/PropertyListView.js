@@ -4,8 +4,10 @@ Ext.define("App.view.property.PropertyListView", {
 
     requires: [
         "App.view.property.PropertyListViewModel",
-        "App.model.Property",
-        "App.view.property.PropertyListController"
+        "App.view.property.PropertyListController",
+        "App.view.property.PropertyListWindow",
+        "App.view.property.PropertyTypeWindow",
+        "App.model.Property"
     ],
 
     viewModel: {
@@ -17,19 +19,74 @@ Ext.define("App.view.property.PropertyListView", {
 
     border: true,
 
+    // columnLines: true, // 表格线
+
+    bind: {
+        store: "{propertyListStore}"
+    },
+
     columns: [{
         text: "propertyId",
+        itemId: "propertyId",
         dataIndex: "propertyId",
         hidden : true
     }, {
         text: "userId",
+        itemId: "userId",
         dataIndex: "userId",
         hidden : true
     }, {
-        text: "资产类型",
+        text: "propertyTypeId",
+        itemId: "propertyTypeId",
         dataIndex: "propertyTypeId",
+        hidden : true
+    }, {
+        text: "资产拥有人",
+        dataIndex: "userName",
         flex : 1,
-        editor: 'textfield'
+        editor: {
+            xtype: "combobox",
+            name: 'userName',
+            editable: false,
+            displayField: "userName",
+            valueField: "id",
+            bind: {
+                store: "{usersStore}"
+            },
+            queryMode: "local",
+            listeners: {
+                select: function (combo, record, eOpts){
+                    var view = combo.up('propertyList');
+                    var data = view.selection.data;
+                    data.users = record.data;
+                    data.userId = record.data.id;
+                    view.paramData = data;
+                }
+            }
+        }
+    }, {
+        text: "资产类型",
+        dataIndex: "propertyTypeName",
+        flex : 1,
+        editor: {
+            xtype: "combobox",
+            name: 'propertyTypeName',
+            editable: false,
+            displayField: "propertyTypeName",
+            valueField: "id",
+            bind: {
+                store: "{propertyTypeStore}"
+            },
+            queryMode: "local",
+            listeners: {
+                select: function (combo, record, eOpts){
+                    var view = combo.up('propertyList');
+                    var data = view.selection.data;
+                    data.propertyTypeId = record.data.id;
+                    view.paramData = data;
+                }
+            }
+        }
     }, {
         text: "名称",
         dataIndex: "propertyName",
@@ -70,20 +127,77 @@ Ext.define("App.view.property.PropertyListView", {
         flex : 1
     }],
 
+    tbar: [{
+        xtype: "combobox",
+        id: 'userName',
+        maxWidth: 200,
+        fieldLabel: "员工",
+        name: 'userName',
+        width: 150,
+        labelWidth: 40,
+        editable: false,
+        displayField: "userName",
+        valueField: "id",
+        bind: {
+            store: "{usersStore}"
+        },
+        queryMode: "local"
+    }, {
+        xtype: "combobox",
+        id: 'propertyTypeName',
+        maxWidth: 200,
+        fieldLabel: "资产类型",
+        name: 'propertyTypeName',
+        width: 150,
+        labelWidth: 60,
+        editable: false,
+        displayField: "propertyTypeName",
+        valueField: "id",
+        bind: {
+            store: "{propertyTypeStore}"
+        },
+        queryMode: "local"
+    }, {
+        xtype: "textfield",
+        maxWidth: 205,
+        fieldLabel: "名称",
+        name: 'propertyName',
+        width: 200,
+        labelWidth: 45
+    }, {
+        xtype: "textfield",
+        maxWidth: 205,
+        fieldLabel: "编号",
+        name: 'propertyNo',
+        width: 200,
+        labelWidth: 45
+    }, {
+        xtype: "button",
+        text: "查询",
+        icon: "icons/bullet_magnify.png",
+        cls: "x-btn-text-icon",
+        handler: "onSearch"
+    }, "->", "->", {
+        xtype: "button",
+        text: "新增",
+        icon: "extjs/resources/images/tree/drop-add.png",
+        cls: "x-btn-text-icon",
+        handler: "onCreate"
+    }, {
+        xtype: "button",
+        text: "删除",
+        icon: "icons/bullet_cross.png",
+        cls: "x-btn-text-icon",
+        handler: "onBatchDel"
+    }, {
+        xtype: "button",
+        text: "资产类型管理",
+        icon: "extjs/resources/images/tree/drop-add.png",
+        cls: "x-btn-text-icon",
+        handler: "onCreateType"
+    }],
 
     initComponent: function() {
-        var gridStore = Ext.create('Ext.data.Store', {
-            model: "App.model.Property",
-            autoLoad: true,
-            proxy: {
-                type: "ajax",
-                url: "/property/findList",
-                reader: {
-                    type: "json",
-                    rootProperty: "totalProperty"
-                }
-            }
-        });
         var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
             pluginId:'rowEditing',
             saveBtnText: '保存',
@@ -91,54 +205,13 @@ Ext.define("App.view.property.PropertyListView", {
             autoCancel: false,
             clicksToEdit:2	//双击进行修改
         })
-        gridStore.load();
+        var groupingFeature= Ext.create('Ext.grid.feature.Grouping',{
+            groupHeaderTpl: '<strong>{userName}的资产</strong>'
+        });
         Ext.apply(this, {
             title: "资产信息管理",
-            store: gridStore,
             plugins: [rowEditing],
-            tbar: [{
-                xtype: "textfield",
-                maxWidth: 205,
-                fieldLabel: "员工",
-                width: 200,
-                labelWidth: 45
-            }, {
-                xtype: "textfield",
-                maxWidth: 205,
-                fieldLabel: "资产类型",
-                width: 200,
-                labelWidth: 60
-            }, {
-                xtype: "textfield",
-                maxWidth: 205,
-                fieldLabel: "名称",
-                width: 200,
-                labelWidth: 45
-            }, {
-                xtype: "textfield",
-                maxWidth: 205,
-                fieldLabel: "编号",
-                width: 200,
-                labelWidth: 45
-            }, {
-                xtype: "button",
-                text: "查询",
-                icon: "icons/bullet_magnify.png",
-                cls: "x-btn-text-icon",
-                handler: "onSearch"
-            }, "->", "->", {
-                xtype: "button",
-                text: "新增",
-                icon: "extjs/resources/images/tree/drop-add.png",
-                cls: "x-btn-text-icon",
-                handler: "onCreate"
-            }, {
-                xtype: "button",
-                text: "删除",
-                icon: "icons/bullet_cross.png",
-                cls: "x-btn-text-icon",
-                handler: "onBatchDel"
-            }]
+            features: [groupingFeature]
         });
         this.callParent(arguments);
     }

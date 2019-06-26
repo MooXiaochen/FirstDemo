@@ -22,7 +22,7 @@ Ext.define("App.view.login.Login", {
 				closable: false,
 				resizable: false,
 				constrain: true,
-				iconCls: "icon-user",
+				iconCls: "icon-users",
 				cls: "login-win",
 				items: [{
 					xtype: "image",

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 资产信息service
@@ -19,8 +20,13 @@ public class PropertyServiceImpl implements PropertyService {
     private PropertyMapper propertyMapper;
 
     @Override
-    public List<Property> doGetPropertyList() {
+    public List<Property> getPropertyList() {
         return propertyMapper.getPropertyList();
+    }
+
+    @Override
+    public List<Property> findListByCondition(Integer userId, Integer propertyTypeId, String propertyName, String equipmentNo) {
+        return propertyMapper.findListByCondition(userId, propertyTypeId, propertyName, equipmentNo);
     }
 
     @Override

@@ -43,6 +43,10 @@ public class Property implements Serializable {
 
     private String registrant;
 
+    private PropertyType propertyType;
+
+    private Users users;
+
 
     public Long getPropertyId() {
         return propertyId;
@@ -130,5 +134,21 @@ public class Property implements Serializable {
 
     public void setRegistrant(String registrant) {
         this.registrant = registrant;
+    }
+
+    public PropertyType getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(PropertyType propertyType) {
+        this.propertyType = propertyType;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
     }
 }

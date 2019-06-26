@@ -12,6 +12,10 @@ public class Users implements Serializable {
 
     private String userName;
 
+    private String userNameEn;
+
+    private String loginName;
+
     private String userPassword;
 
     private Integer sex;
@@ -19,6 +23,7 @@ public class Users implements Serializable {
     private Integer grade;
 
     private Date registrationTime;
+
 
     public Integer getId() {
         return id;
@@ -74,5 +79,21 @@ public class Users implements Serializable {
 
     public void setRegistrationTime(Date registrationTime) {
         this.registrationTime = registrationTime;
+    }
+
+    public String getUserNameEn() {
+        return userNameEn;
+    }
+
+    public void setUserNameEn(String userNameEn) {
+        this.userNameEn = userNameEn;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 }

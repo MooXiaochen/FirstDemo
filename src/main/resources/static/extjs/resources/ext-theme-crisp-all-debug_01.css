@@ -9022,7 +9022,7 @@ the height of a multi-line element */
    * button, so part of the custom button's clickable area will be covered by
    * the hidden file input's text box instead. This results in a text-selection
    * mouse cursor over that part of the button, at least in Firefox, which is
-   * confusing to a user. Giving the hidden file input a huge font-size makes
+   * confusing to a users. Giving the hidden file input a huge font-size makes
    * the native button part very large so it will cover the whole clickable area.
    */
   font-size: 1000px; }

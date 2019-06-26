@@ -1,6 +1,10 @@
 package com.example.firstdemo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @description: 知产类型
@@ -11,24 +15,23 @@ import java.io.Serializable;
 public class PropertyType implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Long propertyTypeId;
 
-    private String typeName;
+    private String propertyTypeName;
 
-
-    public Long getId() {
-        return id;
+    public Long getPropertyTypeId() {
+        return propertyTypeId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPropertyTypeId(Long propertyTypeId) {
+        this.propertyTypeId = propertyTypeId;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getPropertyTypeName() {
+        return propertyTypeName;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setPropertyTypeName(String propertyTypeName) {
+        this.propertyTypeName = propertyTypeName;
     }
 }
