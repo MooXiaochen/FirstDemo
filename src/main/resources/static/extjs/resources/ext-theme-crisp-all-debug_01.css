@@ -55,9 +55,9 @@
  * @member Global_CSS
  */
 /*
- * Method which inserts a full background-image property for a theme image.
+ * Method which inserts a full background-image asset for a theme image.
  * It checks if the file exists and if it doesn't, it'll throw an error.
- * By default it will not include the background-image property if it is not found,
+ * By default it will not include the background-image asset if it is not found,
  * but this can be changed by changing the default value of $include-missing-images to
  * be true.
  */
@@ -3093,7 +3093,7 @@
 /**
  * @var {boolean}
  * True to use vertically oriented triggers. False to use horizontally oriented triggers.
- * Themes that set this property to true must also override the
+ * Themes that set this asset to true must also override the
  * {@link Ext.form.trigger.Spinner#vertical} config to match. Defaults to true.  When
  * 'vertical' orientation is used, the background image for both triggers is
  * 'form/spinner'.  When 'horizontal' is used, the triggers use separate background
@@ -5067,7 +5067,7 @@
 /**
  * @var {boolean}
  * True to use vertically oriented triggers. False to use horizontally oriented triggers.
- * Themes that set this property to true must also override the
+ * Themes that set this asset to true must also override the
  * {@link Ext.form.trigger.Spinner#vertical} config to match. Defaults to true.  When
  * 'vertical' orientation is used, the background image for both triggers is
  * 'form/spinner'.  When 'horizontal' is used, the triggers use separate background
@@ -6373,20 +6373,20 @@
  * The cursor for the RowExpander icon
  */
 /**
- * @class Ext.grid.property.Grid
+ * @class Ext.grid.asset.Grid
  */
 /**
  * @var {string}
- * The background-image of property grid cells
+ * The background-image of asset grid cells
  */
 /**
  * @var {string}
- * The background-position of property grid cells
+ * The background-position of asset grid cells
  */
 /**
  * @var {number/string}
- * The padding to add before the text of property grid cells to make room for the
- * background-image. Only applies if $grid-property-cell-background-image is not null
+ * The padding to add before the text of asset grid cells to make room for the
+ * background-image. Only applies if $grid-asset-cell-background-image is not null
  */
 /**
  * @class Ext.layout.container.Accordion
@@ -6429,7 +6429,7 @@
  */
 /**
  * @var {string}
- * The text-transform property of Accordion headers
+ * The text-transform asset of Accordion headers
  */
 /**
  * @var {number}
@@ -7484,7 +7484,7 @@
  * @var {boolean} $include-ie
  * True to include Internet Explorer specific rules for IE9 and lower.  IE10 and up are
  * considered to be "modern" browsers, and as such do not need any of the CSS hacks required
- * for IE9 and below.  Setting this property to false will result in a significantly smaller
+ * for IE9 and below.  Setting this asset to false will result in a significantly smaller
  * CSS file size, and may also result in a slight performance improvement, because the
  * browser will have fewer rules to process.
  */
@@ -15747,7 +15747,7 @@ the height of a multi-line element */
 /**
  * Creates a visual theme for a Panel.
  *
- * **Note:** When using `frame: true`, this mixin call creates a UI property with the name and a "-framed" suffix.
+ * **Note:** When using `frame: true`, this mixin call creates a UI asset with the name and a "-framed" suffix.
  *
  * For example, Panel's UI will be set to "highlight-framed" if `frame:true`.
  *

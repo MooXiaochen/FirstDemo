@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.firstdemo.mapper.AssetMapper">
+  <resultMap id="BaseResultMap" type="com.example.firstdemo.pojo.Asset">
+    <id column="asset_id" jdbcType="INTEGER" property="assetId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="asset_type_id" jdbcType="INTEGER" property="assetTypeId" />
+    <result column="asset_name" jdbcType="VARCHAR" property="assetName" />
+    <result column="equipment_no" jdbcType="VARCHAR" property="equipmentNo" />
+    <result column="asset_price" jdbcType="DECIMAL" property="assetPrice" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="registrant" jdbcType="VARCHAR" property="registrant" />
+    <association property="assetType" javaType="com.example.firstdemo.pojo.AssetType">
+      <id property="assetTypeId" column="asset_type_id"/>
+      <result column="asset_type_name" jdbcType="VARCHAR" property="assetTypeName" />
+    </association>
+    <association property="users" javaType="com.example.firstdemo.pojo.Users">
+      <id property="id" column="user_id"/>
+      <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+      <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+      <result column="user_name_en" jdbcType="VARCHAR" property="userNameEn" />
+    </association>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    asset_id, user_id, asset_type_id, asset_name, equipment_no, asset_price,
+    "count", create_time, update_time, description, registrant
+  </sql>
+
+  <!-- 根据ID查询 -->
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+      <include refid="Base_Column_List" />
+    from
+      asset p,
+      asset_type pt
+    where asset_id = #{assetId}
+    and p.asset_id = pt.asset_type_id
+  </select>
+
+  <!-- 查询全部 -->
+  <select id="getAssetList" resultMap="BaseResultMap">
+    select 
+      *
+    from
+      asset p,
+      asset_type pt,
+      users u
+    where
+      p.asset_type_id = pt.asset_type_id
+    and
+      p.user_id = u.user_id
+  </select>
+
+  <!-- 按条件查询 -->
+  <select id="findListByCondition" resultMap="BaseResultMap">
+    select
+        *
+    from
+      asset p
+    LEFT JOIN users u ON p.user_id = u.user_id
+    LEFT JOIN asset_type pt ON p.asset_type_id = pt.asset_type_id
+    <where>
+        <if test="userId != 0">
+            AND p.user_id = #{userId}
+        </if>
+        <if test="assetTypeId != 0">
+            AND p.asset_type_id = #{assetTypeId}
+        </if>
+        <if test="assetName != ''">
+            AND p.asset_name LIKE '%${assetName}%'
+        </if>
+        <if test="equipmentNo != ''">
+            AND p.equipment_no LIKE '%${equipmentNo}%'
+        </if>
+
+    </where>
+  </select>
+
+  <!-- 根据ids删除 -->
+  <delete id="deleteByIds" parameterType="java.util.List">
+    delete from asset
+    where asset_id in
+    <foreach collection="list" item="assetId" open="(" separator="," close=")">
+      #{assetId}
+    </foreach>
+  </delete>
+
+  <!-- 新增数据 -->
+  <insert id="insertSelective" parameterType="com.example.firstdemo.pojo.Asset">
+    insert into asset
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="assetTypeId != null">
+        asset_type_id,
+      </if>
+      <if test="assetName != null">
+        asset_name,
+      </if>
+      <if test="equipmentNo != null">
+        equipment_no,
+      </if>
+      <if test="assetPrice != null">
+        asset_price,
+      </if>
+      <if test="count != null">
+        "count",
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="registrant != null">
+        registrant,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="assetTypeId != null">
+        #{assetTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="assetName != null">
+        #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNo != null">
+        #{equipmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="assetPrice != null">
+        #{assetPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null">
+        #{registrant,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- 更新数据 -->
+  <update id="updateByIdSelective" parameterType="com.example.firstdemo.pojo.Asset">
+    update asset
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="assetTypeId != null">
+        asset_type_id = #{assetTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="assetName != null">
+        asset_name = #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNo != null">
+        equipment_no = #{equipmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="assetPrice != null">
+        asset_price = #{assetPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="count != null">
+        "count" = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null">
+        registrant = #{registrant,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where asset_id = #{assetId,jdbcType=INTEGER}
+  </update>
+</mapper>

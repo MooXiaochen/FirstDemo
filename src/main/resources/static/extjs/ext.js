@@ -6956,7 +6956,7 @@ var Ext = Ext || {};
       "idx": 522
     },
     {
-      "path": "../src/grid/property/Grid.js",
+      "path": "../src/grid/asset/Grid.js",
       "requires": [
         472
       ],
@@ -6982,7 +6982,7 @@ var Ext = Ext || {};
       "idx": 523
     },
     {
-      "path": "../src/grid/property/HeaderContainer.js",
+      "path": "../src/grid/asset/HeaderContainer.js",
       "requires": [
         72,
         482
@@ -6991,7 +6991,7 @@ var Ext = Ext || {};
       "idx": 524
     },
     {
-      "path": "../src/grid/property/Property.js",
+      "path": "../src/grid/asset/Asset.js",
       "requires": [
         145
       ],
@@ -6999,7 +6999,7 @@ var Ext = Ext || {};
       "idx": 525
     },
     {
-      "path": "../src/grid/property/Reader.js",
+      "path": "../src/grid/asset/Reader.js",
       "requires": [
         147
       ],
@@ -7009,7 +7009,7 @@ var Ext = Ext || {};
       "idx": 526
     },
     {
-      "path": "../src/grid/property/Store.js",
+      "path": "../src/grid/asset/Store.js",
       "requires": [
         151,
         162,
@@ -18476,7 +18476,7 @@ Ext.Base = (function(flexSetter) {
             if (name) {
                 cfg = Ext.Config.map[name];
                 if (!cfg) {
-                    Ext.Logger.error("Invalid property name for getter: '" + name + "' for '" + me.$className + "'.");
+                    Ext.Logger.error("Invalid asset name for getter: '" + name + "' for '" + me.$className + "'.");
                 }
                 getterName = cfg.names.get;
                 if (peek && me.hasOwnProperty(getterName)) {
@@ -26926,7 +26926,7 @@ Ext.define('Ext.overrides.app.Application', {
             viewportClass = data.autoCreateViewport;
         if (viewportClass) {
             if (!namespace) {
-                Ext.Error.raise("[Ext.app.Application] Can't resolve namespace for " + data.$className + ", did you forget to specify 'name' property?");
+                Ext.Error.raise("[Ext.app.Application] Can't resolve namespace for " + data.$className + ", did you forget to specify 'name' asset?");
             }
             if (viewportClass === true) {
                 viewportClass = 'Viewport';
